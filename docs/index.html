@@ -6,35 +6,72 @@
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#0b0d10">
   <meta name="description" content="Transcribe Audio turns local audio and video recordings into text transcripts on Windows with almost no friction.">
+  <meta property="og:title" content="Transcribe Audio">
+  <meta property="og:description" content="Local-first Windows transcription. Download, run, press Enter, and your transcript opens.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://luckygithub777.github.io/transcribe-audio/">
   <title>Transcribe Audio</title>
   <style>
-    :root{--bg:#0b0d10;--panel:#11151a;--text:#f4f7fb;--muted:#9aa7b5;--line:#252b33;--accent:#fff;--soft:#171c22;--ok:#b8f7ce}
-    @media (prefers-color-scheme:light){:root{--bg:#f7f8fa;--panel:#fff;--text:#11151a;--muted:#5e6976;--line:#dfe3e8;--accent:#11151a;--soft:#f1f3f5;--ok:#146c3a}}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
-    main{width:min(980px,calc(100% - 36px));margin:auto;padding:72px 0 56px}.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
-    h1{font-size:clamp(3rem,9vw,6.4rem);line-height:.92;letter-spacing:-.055em;margin:.35em 0 .2em} .lede{max-width:720px;font-size:clamp(1.12rem,2.3vw,1.45rem);color:var(--muted);margin:0}
-    .actions{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0 48px}.button{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid var(--line);color:var(--text);background:var(--panel)}
+    :root{--bg:#0b0d10;--panel:#11151a;--text:#f4f7fb;--muted:#9aa7b5;--line:#252b33;--accent:#fff;--soft:#171c22;--ok:#b8f7ce;--focus:#8cc8ff}
+    @media (prefers-color-scheme:light){:root{--bg:#f7f8fa;--panel:#fff;--text:#11151a;--muted:#5e6976;--line:#dfe3e8;--accent:#11151a;--soft:#f1f3f5;--ok:#146c3a;--focus:#075fb8}}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+    a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+    .skip{position:absolute;left:-9999px;top:12px;background:var(--accent);color:var(--bg);padding:10px 14px;border-radius:8px;z-index:5}
+    .skip:focus{left:12px}
+    main{width:min(980px,calc(100% - 36px));margin:auto;padding:72px 0 56px}
+    .eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+    .status{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:.82rem;font-weight:700}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 18%,transparent)}
+    h1{font-size:clamp(3rem,9vw,6.4rem);line-height:.92;letter-spacing:-.055em;margin:.28em 0 .2em}
+    .lede{max-width:720px;font-size:clamp(1.12rem,2.3vw,1.45rem);color:var(--muted);margin:0}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0 48px}
+    .button{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid var(--line);color:var(--text);background:var(--panel)}
+    .button:hover{border-color:var(--muted)}
     .button.primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}
-    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:48px 0}.flow div{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:16px}.flow span{display:block;color:var(--muted);font-size:.8rem;margin-bottom:6px}
+    .button.primary:hover{opacity:.9}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:48px 0}
+    .flow div{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:16px}
+    .flow span{display:block;color:var(--muted);font-size:.8rem;margin-bottom:6px}
     .terminal{background:#080a0d;color:#edf4fb;border:1px solid #242a31;border-radius:14px;padding:22px;overflow:auto;font:14px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;box-shadow:0 18px 55px rgba(0,0,0,.18)}
-    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin:18px 0 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}.card h2{margin:0 0 8px;font-size:1.05rem}.card p{margin:0;color:var(--muted)}
-    code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.formats{margin:36px 0;color:var(--muted);font-size:.92rem}.privacy{color:var(--ok);font-weight:700}
-    footer{border-top:1px solid var(--line);margin-top:48px;padding-top:24px;color:var(--muted);font-size:.9rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap} footer a{color:inherit}
-    @media(max-width:720px){main{padding-top:48px}.flow{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 0}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+    .card h2{margin:0 0 8px;font-size:1.05rem}
+    .card p{margin:0;color:var(--muted)}
+    code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+    .privacy{color:var(--ok);font-weight:700}
+    .proof{margin:36px 0 0;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--soft)}
+    .proof-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+    .proof h2{margin:0 0 6px;font-size:1.05rem}
+    .proof p{margin:0;color:var(--muted)}
+    .hash{display:block;margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+    .proof-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:.9rem}
+    .proof-links a{color:var(--text)}
+    .formats{margin:36px 0;color:var(--muted);font-size:.92rem}
+    footer{border-top:1px solid var(--line);margin-top:48px;padding-top:24px;color:var(--muted);font-size:.9rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    footer a{color:inherit}
+    @media(max-width:760px){main{padding-top:48px}.flow{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+    @media(max-width:480px){.flow{grid-template-columns:1fr}.actions{display:grid}.button{width:100%}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
 </head>
 <body>
-<main>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
   <div class="eyebrow">Local-first Windows transcription</div>
+  <div class="status"><span class="dot" aria-hidden="true"></span>v1.0.0 · Verified Windows release</div>
   <h1>Transcribe Audio</h1>
   <p class="lede">Turn audio and video recordings into text transcripts with almost no friction. Your media stays on your Windows PC.</p>
+
   <div class="actions">
     <a class="button primary" href="https://github.com/LuckyGitHub777/transcribe-audio/releases/download/v1.0.0/transcribe-audio-v1.0.0-windows.zip">Download for Windows</a>
+    <a class="button" href="https://github.com/LuckyGitHub777/transcribe-audio/releases/tag/v1.0.0">Release notes</a>
     <a class="button" href="https://github.com/LuckyGitHub777/transcribe-audio">View source</a>
   </div>
 
   <section class="flow" aria-label="How it works">
-    <div><span>01</span><strong>Download</strong></div>
+    <div><span>01</span><strong>Download + extract</strong></div>
     <div><span>02</span><strong>Run</strong></div>
     <div><span>03</span><strong>Press Enter</strong></div>
     <div><span>04</span><strong>Transcript opens</strong></div>
@@ -60,7 +97,26 @@ Select [Enter = 0], or paste a full file path:</pre>
     </div>
     <div class="card">
       <h2 class="privacy">Local by default</h2>
-      <p>This webpage does not upload or transcribe files. The Windows app processes recordings and transcripts locally. First-time setup or model download may use the internet.</p>
+      <p>This webpage does not upload or transcribe files. The Windows app processes recordings and transcripts locally.</p>
+    </div>
+    <div class="card">
+      <h2>Honest first run</h2>
+      <p>Setup may download required components, and the first transcription may download the selected Whisper model. Compatible NVIDIA GPUs are used automatically; CPU fallback remains available.</p>
+    </div>
+  </section>
+
+  <section class="proof" aria-label="Release verification">
+    <div class="proof-top">
+      <div>
+        <h2>Verified release</h2>
+        <p>The published Windows ZIP is hash-verified against the release checksum.</p>
+      </div>
+      <strong>v1.0.0</strong>
+    </div>
+    <code class="hash">SHA-256 · a6b44d87c00547e018cc326ca2a0e32788e0c36137d81e1f2076fd6eda6ec976</code>
+    <div class="proof-links">
+      <a href="https://github.com/LuckyGitHub777/transcribe-audio/releases/download/v1.0.0/SHA256SUMS.txt">Checksum file</a>
+      <a href="https://github.com/LuckyGitHub777/transcribe-audio/security">Security</a>
     </div>
   </section>
 
@@ -68,7 +124,7 @@ Select [Enter = 0], or paste a full file path:</pre>
 
   <footer>
     <span>Transcribe Audio v1.0.0 · MIT License</span>
-    <span><a href="https://github.com/LuckyGitHub777/transcribe-audio/security">Security</a> · <a href="https://github.com/LuckyGitHub777/transcribe-audio/issues">Issues</a></span>
+    <span><a href="https://github.com/LuckyGitHub777/transcribe-audio/releases/tag/v1.0.0">Release</a> · <a href="https://github.com/LuckyGitHub777/transcribe-audio/issues">Issues</a></span>
   </footer>
 </main>
 </body>
