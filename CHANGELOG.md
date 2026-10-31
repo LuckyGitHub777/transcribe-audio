@@ -15,4 +15,4 @@ Initial public release.
 - Private local preferences and recognition vocabulary.
 - Quiet setup repair, diagnostics, mock engine tests, and Windows CI validation.
 - Minimal privacy-first GitHub Pages landing experience.
-- Release-tag real Whisper transcription smoke test using generated Windows speech.
+- Release-gate real Whisper transcription smoke test using generated Windows speech.
