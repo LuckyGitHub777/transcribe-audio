@@ -6,7 +6,7 @@ Transcribe Audio is a local-first Windows utility for turning audio and video re
 
 ## Quick start
 
-1. Download and extract the Windows release.
+1. Download the repository ZIP (`Code` → `Download ZIP`) or clone the repository.
 2. Run `Transcribe-Audio.cmd`.
 3. Press **Enter** to transcribe `[0]`, the newest recording.
 
