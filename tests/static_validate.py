@@ -75,9 +75,11 @@ assert 'Install-Transcribe-Audio.ps1' in front
 
 website = (ROOT / 'docs/index.html').read_text(encoding='utf-8')
 for token in [
-    '<title>Transcribe Audio</title>', 'Download for Windows', 'Press Enter',
-    'This webpage does not upload or transcribe files.',
+    '<title>Transcribe Audio</title>', 'Download for Windows', 'Download + extract', 'Press Enter',
+    'This webpage does not upload or transcribe files.', 'Honest first run', 'Verified release',
+    'a6b44d87c00547e018cc326ca2a0e32788e0c36137d81e1f2076fd6eda6ec976',
     'releases/download/v1.0.0/transcribe-audio-v1.0.0-windows.zip',
+    'releases/download/v1.0.0/SHA256SUMS.txt',
 ]:
     assert token in website, token
 assert 'analytics' not in website.lower()
