@@ -77,7 +77,7 @@ website = (ROOT / 'docs/index.html').read_text(encoding='utf-8')
 for token in [
     '<title>Transcribe Audio</title>', 'Download for Windows', 'Press Enter',
     'This webpage does not upload or transcribe files.',
-    'releases/latest/download/transcribe-audio-v1.0.0-windows.zip',
+    'releases/download/v1.0.0/transcribe-audio-v1.0.0-windows.zip',
 ]:
     assert token in website, token
 assert 'analytics' not in website.lower()
