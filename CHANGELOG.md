@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — 2026-08-12
+## 1.0.0 — 2026-10-31
 
 Initial public release.
 
@@ -14,3 +14,5 @@ Initial public release.
 - Safe transcript publication, prior-transcript archiving, and automatic opening.
 - Private local preferences and recognition vocabulary.
 - Quiet setup repair, diagnostics, mock engine tests, and Windows CI validation.
+- Minimal privacy-first GitHub Pages landing experience.
+- Release-tag real Whisper transcription smoke test using generated Windows speech.

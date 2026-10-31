@@ -25,7 +25,8 @@ jobs:
           $files = @(
             'app/Transcribe-Audio.ps1',
             'installer/Install-Transcribe-Audio.ps1',
-            'installer/Uninstall-Transcribe-Audio.ps1'
+            'installer/Uninstall-Transcribe-Audio.ps1',
+            'tests/real_transcription.ps1'
           )
           foreach ($file in $files) {
             $tokens = $null

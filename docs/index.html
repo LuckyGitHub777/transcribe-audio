@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="description" content="Transcribe Audio turns local audio and video recordings into text transcripts on Windows with almost no friction.">
+  <title>Transcribe Audio</title>
+  <style>
+    :root{--bg:#0b0d10;--panel:#11151a;--text:#f4f7fb;--muted:#9aa7b5;--line:#252b33;--accent:#fff;--soft:#171c22;--ok:#b8f7ce}
+    @media (prefers-color-scheme:light){:root{--bg:#f7f8fa;--panel:#fff;--text:#11151a;--muted:#5e6976;--line:#dfe3e8;--accent:#11151a;--soft:#f1f3f5;--ok:#146c3a}}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+    main{width:min(980px,calc(100% - 36px));margin:auto;padding:72px 0 56px}.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+    h1{font-size:clamp(3rem,9vw,6.4rem);line-height:.92;letter-spacing:-.055em;margin:.35em 0 .2em} .lede{max-width:720px;font-size:clamp(1.12rem,2.3vw,1.45rem);color:var(--muted);margin:0}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0 48px}.button{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid var(--line);color:var(--text);background:var(--panel)}
+    .button.primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:48px 0}.flow div{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:16px}.flow span{display:block;color:var(--muted);font-size:.8rem;margin-bottom:6px}
+    .terminal{background:#080a0d;color:#edf4fb;border:1px solid #242a31;border-radius:14px;padding:22px;overflow:auto;font:14px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;box-shadow:0 18px 55px rgba(0,0,0,.18)}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin:18px 0 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}.card h2{margin:0 0 8px;font-size:1.05rem}.card p{margin:0;color:var(--muted)}
+    code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.formats{margin:36px 0;color:var(--muted);font-size:.92rem}.privacy{color:var(--ok);font-weight:700}
+    footer{border-top:1px solid var(--line);margin-top:48px;padding-top:24px;color:var(--muted);font-size:.9rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap} footer a{color:inherit}
+    @media(max-width:720px){main{padding-top:48px}.flow{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Local-first Windows transcription</div>
+  <h1>Transcribe Audio</h1>
+  <p class="lede">Turn audio and video recordings into text transcripts with almost no friction. Your media stays on your Windows PC.</p>
+  <div class="actions">
+    <a class="button primary" href="https://github.com/LuckyGitHub777/transcribe-audio/releases/latest/download/transcribe-audio-v1.0.0-windows.zip">Download for Windows</a>
+    <a class="button" href="https://github.com/LuckyGitHub777/transcribe-audio">View source</a>
+  </div>
+
+  <section class="flow" aria-label="How it works">
+    <div><span>01</span><strong>Download</strong></div>
+    <div><span>02</span><strong>Run</strong></div>
+    <div><span>03</span><strong>Press Enter</strong></div>
+    <div><span>04</span><strong>Transcript opens</strong></div>
+  </section>
+
+  <pre class="terminal" aria-label="Transcribe Audio terminal example">Transcribe Audio
+Local transcription
+
+Recent files
+  Sound Recorder | Downloads
+
+[12] ...
+ ...
+[ 1] Recording 87.m4a
+[ 0] Interview.m4a  &lt;- newest
+
+Select [Enter = 0], or paste a full file path:</pre>
+
+  <section class="grid">
+    <div class="card">
+      <h2>One simple default</h2>
+      <p>Run <code>Transcribe-Audio.cmd</code> once. After setup, type <code>transcribe-audio</code>. Press Enter for the newest recording.</p>
+    </div>
+    <div class="card">
+      <h2 class="privacy">Local by default</h2>
+      <p>This webpage does not upload or transcribe files. The Windows app processes recordings and transcripts locally. First-time setup or model download may use the internet.</p>
+    </div>
+  </section>
+
+  <p class="formats">M4A · WAV · MP3 · AAC · FLAC · OGG · OPUS · WMA · MP4 · MOV · MKV · WebM · 3GP</p>
+
+  <footer>
+    <span>Transcribe Audio v1.0.0 · MIT License</span>
+    <span><a href="https://github.com/LuckyGitHub777/transcribe-audio/security">Security</a> · <a href="https://github.com/LuckyGitHub777/transcribe-audio/issues">Issues</a></span>
+  </footer>
+</main>
+</body>
+</html>

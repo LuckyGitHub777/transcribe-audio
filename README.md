@@ -4,10 +4,12 @@
 
 Transcribe Audio is a local-first Windows utility for turning audio and video recordings into text transcripts. It finds recent recordings, keeps the newest item at `[0]` nearest the prompt, uses GPU acceleration when available, saves the transcript safely beside the source, and opens it automatically.
 
+**Web:** https://luckygithub777.github.io/transcribe-audio/
+
 ## Quick start
 
-1. Download the repository ZIP (`Code` → `Download ZIP`) or clone the repository.
-2. Run `Transcribe-Audio.cmd`.
+1. Download the Windows package from the latest GitHub release.
+2. Extract it and run `Transcribe-Audio.cmd`.
 3. Press **Enter** to transcribe `[0]`, the newest recording.
 
 After setup, run `transcribe-audio` from any PowerShell or Windows Terminal location.
@@ -58,7 +60,7 @@ Automated transcription can contain errors. Verify important names, numbers, dat
 
 ## Privacy
 
-Audio and transcripts are processed locally. Transcribe Audio includes no telemetry or media-upload feature. Setup and first model use may access the internet to acquire required runtime components and model files.
+Audio and transcripts are processed locally. Transcribe Audio includes no telemetry or media-upload feature. The project website never receives recordings. Setup and first model use may access the internet to acquire required runtime components and model files.
 
 Private preferences and recognition vocabulary live under `%LOCALAPPDATA%\Transcribe Audio` and are not part of the repository.
 
@@ -82,9 +84,11 @@ Run `Uninstall-Transcribe-Audio.cmd`.
 
 Normal uninstall removes the application, launcher, runtime, and logs while preserving private preferences and vocabulary for a future reinstall. User-created transcripts are never removed. To remove local preferences and vocabulary too, run the uninstaller with `-RemoveUserData`.
 
-## Development
+## Validation
 
-Run the lightweight validation suite:
+Every push validates PowerShell syntax, repository contracts, the engine mock, and the runtime-probe mock on Windows. Release tags additionally run a real Whisper transcription smoke test against generated speech before the release is considered complete.
+
+For local lightweight validation:
 
 ```text
 python tests/static_validate.py
@@ -92,4 +96,4 @@ python tests/test_engine_mock.py
 python tests/test_probe_mock.py
 ```
 
-The repository intentionally stays small: application code, installer, tests, essential documentation, and CI.
+The repository intentionally stays small: application code, installer, focused tests, a minimal project website, essential documentation, and CI.

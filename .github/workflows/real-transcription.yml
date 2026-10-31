@@ -1,0 +1,38 @@
+name: real-transcription
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  real-transcription:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Python 3.11
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+
+      - name: FFmpeg
+        shell: powershell
+        run: choco install ffmpeg -y --no-progress
+
+      - name: Whisper CPU runtime
+        shell: powershell
+        run: |
+          python -m pip install --disable-pip-version-check --no-input "setuptools<82" wheel
+          python -m pip install --disable-pip-version-check --no-input torch==2.11.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check --no-input openai-whisper==20250625
+
+      - name: Real Whisper transcription
+        shell: powershell
+        run: ./tests/real_transcription.ps1

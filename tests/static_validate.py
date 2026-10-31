@@ -1,5 +1,4 @@
 from pathlib import Path
-import re
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -8,14 +7,15 @@ required = [
     'Transcribe-Audio.cmd', 'Uninstall-Transcribe-Audio.cmd',
     'app/Transcribe-Audio.ps1', 'app/transcribe_audio_engine.py', 'app/transcribe_audio_probe.py', 'app/VERSION',
     'installer/Install-Transcribe-Audio.ps1', 'installer/Uninstall-Transcribe-Audio.ps1',
-    'tests/static_validate.py', 'tests/test_engine_mock.py', 'tests/test_probe_mock.py',
-    '.github/workflows/validate.yml',
+    'tests/static_validate.py', 'tests/test_engine_mock.py', 'tests/test_probe_mock.py', 'tests/real_transcription.ps1',
+    '.github/workflows/validate.yml', '.github/workflows/real-transcription.yml',
+    'docs/index.html',
 ]
 for item in required:
     assert (ROOT / item).is_file(), item
 
 for forbidden_path in [
-    'docs', 'MANIFEST.json', 'SHA256SUMS.txt', 'LICENSE-DECISION.md',
+    'MANIFEST.json', 'SHA256SUMS.txt', 'LICENSE-DECISION.md',
     'GoTranscribe.cmd', 'Uninstall-GoTranscribe.cmd', 'app/GoTranscribe.ps1',
     'app/gotranscribe_engine.py', 'app/gotranscribe_probe.py',
     'installer/Install-GoTranscribe.ps1', 'installer/Uninstall-GoTranscribe.ps1',
@@ -32,6 +32,7 @@ readme = (ROOT / 'README.md').read_text(encoding='utf-8')
 assert readme.startswith('# Transcribe Audio\n')
 assert 'Transcribe-Audio.cmd' in readme
 assert 'transcribe-audio' in readme
+assert 'https://luckygithub777.github.io/transcribe-audio/' in readme
 assert 'GoTranscribe' not in readme
 assert 'gotranscribe' not in readme.lower()
 
@@ -72,6 +73,23 @@ front = (ROOT / 'Transcribe-Audio.cmd').read_text(encoding='utf-8', errors='igno
 assert '-Launch' in front
 assert 'Install-Transcribe-Audio.ps1' in front
 
+website = (ROOT / 'docs/index.html').read_text(encoding='utf-8')
+for token in [
+    '<title>Transcribe Audio</title>', 'Download for Windows', 'Press Enter',
+    'This webpage does not upload or transcribe files.',
+    'releases/latest/download/transcribe-audio-v1.0.0-windows.zip',
+]:
+    assert token in website, token
+assert 'analytics' not in website.lower()
+assert '<script' not in website.lower()
+
+real_workflow = (ROOT / '.github/workflows/real-transcription.yml').read_text(encoding='utf-8')
+for token in ["tags:", "- 'v*'", 'tests/real_transcription.ps1', 'openai-whisper==20250625', 'torch==2.11.0']:
+    assert token in real_workflow, token
+real_test = (ROOT / 'tests/real_transcription.ps1').read_text(encoding='utf-8')
+for token in ['System.Speech', '--model tiny.en', '--profile Fast', 'Real Whisper transcription smoke test PASS']:
+    assert token in real_test, token
+
 all_text = '\n'.join(
     p.read_text(encoding='utf-8', errors='ignore')
     for p in ROOT.rglob('*')
@@ -80,8 +98,7 @@ all_text = '\n'.join(
 for forbidden in ['Lucky777', 'Bob Lazar.m4a', 'BN7_James-Wolff', 'RC2-UAT-INCIDENT']:
     assert forbidden not in all_text, forbidden
 
-# User-facing/public narrative files must have the converged identity only.
-for rel in ['README.md','CHANGELOG.md','SECURITY.md','Transcribe-Audio.cmd','app/Transcribe-Audio.ps1']:
+for rel in ['README.md','CHANGELOG.md','SECURITY.md','Transcribe-Audio.cmd','app/Transcribe-Audio.ps1','docs/index.html']:
     text=(ROOT/rel).read_text(encoding='utf-8',errors='ignore')
     assert 'GoTranscribe' not in text, rel
     assert 'gotranscribe' not in text.lower(), rel
