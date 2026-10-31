@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.pytest_cache/
+*.log
+release/
+dist/
+config.json
+Vocabulary.txt
+.DS_Store
+Thumbs.db
