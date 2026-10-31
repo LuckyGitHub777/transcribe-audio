@@ -2,6 +2,15 @@ name: real-transcription
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Transcribe-Audio.cmd'
+      - 'app/**'
+      - 'installer/**'
+      - 'tests/real_transcription.ps1'
+      - '.github/workflows/real-transcription.yml'
 
 permissions:
   contents: read

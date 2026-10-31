@@ -86,7 +86,7 @@ Normal uninstall removes the application, launcher, runtime, and logs while pres
 
 ## Validation
 
-Every push validates PowerShell syntax, repository contracts, the engine mock, and the runtime-probe mock on Windows. The release gate additionally runs a real Whisper transcription smoke test against generated speech before the release is considered complete.
+Every push validates PowerShell syntax, repository contracts, the engine mock, and the runtime-probe mock on Windows. Material application/runtime changes and release validation additionally run a real Whisper transcription smoke test against generated speech.
 
 For local lightweight validation:
 

@@ -84,7 +84,7 @@ assert 'analytics' not in website.lower()
 assert '<script' not in website.lower()
 
 real_workflow = (ROOT / '.github/workflows/real-transcription.yml').read_text(encoding='utf-8')
-for token in ['workflow_dispatch:', 'tests/real_transcription.ps1', 'openai-whisper==20250625', 'torch==2.11.0']:
+for token in ['workflow_dispatch:', 'branches:', "- main", 'paths:', "'app/**'", 'tests/real_transcription.ps1', 'openai-whisper==20250625', 'torch==2.11.0']:
     assert token in real_workflow, token
 real_test = (ROOT / 'tests/real_transcription.ps1').read_text(encoding='utf-8')
 for token in ['System.Speech', '--model tiny.en', '--profile Fast', 'Real Whisper transcription smoke test PASS']:
