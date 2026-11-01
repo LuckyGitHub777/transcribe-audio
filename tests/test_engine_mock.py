@@ -44,7 +44,7 @@ def load_model(name, device=None):
         ]
         if with_vocab:
             vocab = d / 'Vocabulary.txt'
-            vocab.write_text('# comment\nBridge Node 7\nYIG\n', encoding='utf-8')
+            vocab.write_text('# comment\nExample Term 7\nYIG\n', encoding='utf-8')
             cmd += ['--vocabulary', str(vocab)]
         env = os.environ.copy()
         env['PYTHONPATH'] = str(d)
